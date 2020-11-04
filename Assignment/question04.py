@@ -1,15 +1,6 @@
 #!/usr/bin/env python3 
 
 import sys, argparse, socket
-"""
-1. Address relating error: [Errno 8] nodename nor servname provided, or not
-   known
-This happens when the hostname is not correct or does not exists.
-
-2. Connection error: [Errno 60] Operation timed out
-This happens if the server is not listening on the port provided.
-"""
-
 
 def main():
     """ This is the main function """
@@ -52,29 +43,39 @@ def main():
     
     # This is the third block for sending data.
     try:
-        s.sendall(f'GET {filename} HTTP/1.0\r\n\n\n')
+        data = b"GET / HTTP/1.1\nHost: google.com\n\n"
+        s.send(data)
     except socket.error as e:
         print(f'Error sending data: {e}')
         print(f'section {i}')
         i += 1
         sys.exit(1)
 
+    out_file = open('./file', 'ab')
 
     while True:
         # This is the forth block for reciveing data.
         try:
-            buf = s.recv(2048)
+            print('I came here')
+            try:
+                buf = s.recv(10000)
+                s.setblocking(0)
+            except socket.error as e:
+                break
         except socket.error as e:
-            print(f'Error reciveign data: {e}')
+            print(f'Error reciveing data: {e}')
             print(f'section {i}')
             i += 1
-            sys.exit(1)
 
-        if not len(buf):
+        print(len(buf))
+        print('cycle')
+        print(buf)
+
+        if len(buf) == 0:
             break
 
-        # write the recived data.
-        sys.stdout.write(buf)
+        out_file.write(buf)
+
 
 
 if __name__ == '__main__':

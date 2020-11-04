@@ -13,4 +13,4 @@ def get_machine_details(host_name):
         print(f'{socket.error} and {e}')
 
 if __name__ == '__main__':
-    get_machine_details('www.google.com')
+    get_machine_details('google.com')
