@@ -1,22 +1,20 @@
-HTTP/1.1 200 Connection Established
-FiddlerGateway: Direct
-StartTime: 09:10:27.450
-Connection: close
-EndTime: 09:13:27.199
-ClientToServerBytes: 1755
-ServerToClientBytes: 9647
+HTTP/1.1 404 Not Found
+Content-Type: text/html
+Content-Length: 1671
+Connection: keep-alive
+Server: Server
+Date: Thu, 05 Nov 2020 04:21:02 GMT
+x-amz-rid: YT9X85MGK382SSKM0DD6
+x-sdch-encode: 0
+Last-Modified: Fri, 04 Sep 2020 23:58:17 GMT
+ETag: "687-5ae85a47b9840"
+Accept-Ranges: bytes
+Vary: Accept-Encoding,User-Agent,Content-Type,Accept-Encoding,X-Amzn-CDN-Cache,X-Amzn-AX-Treatment,User-Agent
+Strict-Transport-Security: max-age=47474747; includeSubDomains; preload
+X-Frame-Options: SAMEORIGIN
+X-Cache: Error from cloudfront
+Via: 1.1 65f066bbe33b2425eafcf892ef5c75b3.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: BLR50-C1
+X-Amz-Cf-Id: 1SNWES-LB5qLBjIClxqeLGCVtZ3xZfVbQK1_oBb2YbFihzAe9um5Xg==
 
-This is a CONNECT tunnel, through which encrypted HTTPS traffic flows.
-To view the encrypted sessions inside this tunnel, enable the Settings > HTTPS > Capture HTTPS traffic option.
-
-A SSLv3-compatible ServerHello handshake was found. Fiddler extracted the parameters below.
-
-Version: 3.3 (TLS/1.2)
-SessionID:	C4 68 F7 66 37 A9 67 30 4F 71 C6 BE 15 8A 64 A6 E1 D6 11 31 79 90 B9 D6 A1 CC 8D 49 56 1A 95 33
-Random:		CF 21 AD 74 E5 9A 61 11 BE 1D 8C 02 1E 65 B8 91 C2 A2 11 16 7A BB 8C 5E 07 9E 09 E2 C8 A8 33 9C
-Cipher:		TLS_AES_256_GCM_SHA384 [0x1302]
-CompressionSuite:	NO_COMPRESSION [0x00]
-Extensions:
-		supported_versions	
-		key_share	00 17
-
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Amazon.com Page Not Found</title><style>html,body{padding:0;margin:0}img{border:0}#a,#b{background:#232f3e;padding:11px;height:35px}#c{position:absolute;left:22px;top:12px}#e{position:relative;max-width:800px;padding:0 40px 0 171px}#f,#g{height:35px;border:0;font-size:1em}#f{width:100%;margin:0;padding:0 10px;border-radius:4px 0 0 4px}#g{cursor:pointer;background:#febd69;font-weight:bold;border-radius:0 4px 4px 0;-webkit-appearance:none;position:absolute;top:0;right:0;padding:0 12px}@media(max-width:500px){#e{padding-left:0}#b{padding:55px 10px 10px}#c{left:6px}}#h{text-align:center;margin:30px 0}#h img{max-width:90%}#d{display:none}#d[src]{display:inline}</style></head><body><form id="b" accept-charset="utf-8" action="/s" method="GET" role="search"><a href="/"><img id="c" src="https://images-na.ssl-images-amazon.com/images/G/01/error/logo._TTD_.png" alt="Amazon.com"></a><div id="e"><input id="f" name="field-keywords" placeholder="Search"><input id="g" type="submit" value="Go"></div></form><div id="h"><div><a href="/"><img src="https://images-na.ssl-images-amazon.com/images/G/01/error/title._TTD_.png" alt="Sorry! We couldn&#39;t find that page. Try searching or go to Amazon&#39;s home page."></a></div><a href="/dogsofamazon" target="_blank"><img id="d" alt="Dogs of Amazon"><script>document.getElementById("d").src="https://images-na.ssl-images-amazon.com/images/G/01/error/"+(Math.floor(Math.random()*200)+1)+"._TTD_.jpg";</script></a></div></body></html>

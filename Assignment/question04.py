@@ -39,51 +39,62 @@ def get_data(host_name, port=80):
         print(f'Error sending data: {e}')
         sys.exit(1)
 
-def create_file(path, ):
-    """
-    out_file = open('./file', 'ab')
 
-    while True:
-        # This is the forth block for reciveing data.
-        try:
-            print('I came here')
+def create_file(path, s):
+    with open(path, 'ab') as outputfile
+        while True:
             try:
-                buf = s.recv(10000)
-                s.setblocking(0)
+                try:
+                    buf = s.recv(10000)
+                    s.setblocking(0)
+                except socket.error as e:
+                    break
             except socket.error as e:
-                break
-        except socket.error as e:
-            print(f'Error reciveing data: {e}')
+                print(f'Error reciveing data: {e}')
 
-        if len(buf) == 0:
-            break
+            outputfile.write(buf)
 
-        out_file.write(buf)
-    pass
-    """
-    basename = "mylogfile"
-    suffix = datetime.datetime.now().strftime("%y%m%d_%H%M%S")
-    filename = "_".join([basename, suffix]) # e.g. 'mylogfile_120508_171442'
-    print(filename)
 
 def parse_http_headers():
     filename = open('file', 'rb')
     content = filename.read()
     content = content.decode("utf-8") 
     headers, *html_resp = content.split('\n\n')
-    print(headers)
-    print()
     html_resp = '\n\n'.join(html_resp)
-    print(html_resp)
     header_list = headers.split('\n')
     status = header_list[0].split(' ')
-    print(int(status[1]))
+    status_code = int(status[1])
+    header_maps = {}
+
+    for i in range(1, len(header_list)):
+        key, val = header_list[i].split(': ')
+        header_maps[key.lower()] = val
+
+    if status_code == 301 or status_code == 302:
+        return status_code, header_maps['location'], None, None
+    elif status_code == 403:
+        return status_code, None, header_maps['date'], None
+    elif status_code == 404:
+        return status_code, None, header_maps['date'], None
+    elif status_code == 200:
+        return status_code, None, header_maps['date'], content
+
+def process_resp(status_code, location, date, http_resp):
+    if status_code == 301 or status_code == 302:
+        print(f'Status Code: {status_code} redirecting to: {location}')
+    elif status_code == 403:
+        print(f'HTTP/1.1 403 Forbidden\nDate: {date}')
+    elif status_code == 404:
+        print(f'HTTP/1.1 404 Not Found\nDate: {date}')
+    elif status_code == 200:
+        create_file(http_resp)
+        print(status_code, location, date, html_resp, sep='\n')
 
 def main():
     """ This is the main function """
 
-    #create_file('text')
-    parse_http_headers()
+    status_code, location, date, http_resp = parse_http_headers()
+    process_resp(status_code, location, date, http_resp)
     
 
 if __name__ == '__main__':
