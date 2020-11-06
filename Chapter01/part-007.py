@@ -52,7 +52,7 @@ def main():
     
     # This is the third block for sending data.
     try:
-        s.sendall(f'GET {filename} HTTP/1.0\r\n\n\n')
+        s.sendall(f'GET {filename} HTTP/1.0\r\n\n\n'.encode())
     except socket.error as e:
         print(f'Error sending data: {e}')
         print(f'section {i}')
@@ -74,7 +74,7 @@ def main():
             break
 
         # write the recived data.
-        sys.stdout.write(buf)
+        sys.stdout.write(buf.decode())
 
 
 if __name__ == '__main__':
