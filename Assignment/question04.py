@@ -1,13 +1,5 @@
 #!/usr/bin/env python3 
 
-
-"""
-WORK is UNDER PROGRESS !!!
-THIS PROGRAM IS NOT FINISHED YET !!!
-"""
-
-
-
 import sys, argparse, socket, datetime, select
 #from urllib.parse import urlparse
 
@@ -53,7 +45,7 @@ def get_data(host_name, s, port=80):
     """ This is for getting data """
 
     try:
-        data = (f"GET ./workshops/workshops.html HTTP/1.1\r\n\r\n").encode()
+        data = (f'GET /index.html HTTP/1.1\r\nHost: {host_name}\r\n\r\n'.encode())
         s.send(data)
     except socket.error as e:
         print(f'Error sending data: {e}')
@@ -61,8 +53,15 @@ def get_data(host_name, s, port=80):
         sys.exit(1)
     
     response = ''
+    try:
+        buf = s.recv(4096)
+    except socket.error as e:
+        print(f'Error reciveing data: {e}')
+        print('Check five')
+        sys.exit(1)
+    response += buf.decode('cp1252')
 
-    while True:
+    while buf:
         try:
             buf = s.recv(10000)
         except socket.error as e:
@@ -70,8 +69,7 @@ def get_data(host_name, s, port=80):
             print('Check five')
             sys.exit(1)
         
-        response += buf.decode()
-        print(response)
+        response += buf.decode('cp1252')
 
     return response
 
