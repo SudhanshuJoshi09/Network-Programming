@@ -1,7 +1,6 @@
 #!/usr/bin/env python3 
 
-import sys, argparse, socket, datetime, select
-#from urllib.parse import urlparse
+import sys, argparse, socket, datetime, select, re
 
 # class RedirectResponse:
 def get_args():
@@ -14,6 +13,15 @@ def get_args():
 
     return host
 
+def parse_host_name(url):
+    if url.find('http://') == -1 and url.find('https://') == -1:
+        url = 'http://' + url
+    # url = 'https://pydeep.com/python-string'
+    result = re.sub(r'(.*://)?([^/?]+).*', '\g<1>\g<2>', url)
+
+    return result
+
+
 def soc_connect(host_name, port=80):
     """ Socket Creation """
 
@@ -25,10 +33,6 @@ def soc_connect(host_name, port=80):
         sys.exit(1)
 
     try:
-        #parsed_url = urlparse(host_name)
-        #result = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_url)
-        #print(result)
-        #s.connect((result, port))
         s.connect((host_name, port))
     except socket.gaierror as e:
         print(f'Address relating error: {e}')
@@ -41,11 +45,11 @@ def soc_connect(host_name, port=80):
 
     return s
 
-def get_data(host_name, s, port=80):
+def get_data(url_name, s, port=80):
     """ This is for getting data """
 
     try:
-        data = (f'GET /index.html HTTP/1.1\r\nHost: {host_name}\r\n\r\n'.encode())
+        data = (f'GET / HTTP/1.1\r\nHost: {url_name}\r\n\r\n'.encode())
         s.send(data)
     except socket.error as e:
         print(f'Error sending data: {e}')
