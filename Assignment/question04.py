@@ -2,7 +2,8 @@
 
 import sys, argparse, socket, datetime, select, re, os
 
-# class RedirectResponse:
+
+# Utility Functions -----------------------------------------------------------
 def get_args():
     """ Getting in the arguements """
 
@@ -12,6 +13,7 @@ def get_args():
     host = given_args.host
 
     return host
+
 
 def parse_url(url, hostname = True):
     """ Parsing url into hostname and formated url """
@@ -32,6 +34,16 @@ def parse_url(url, hostname = True):
     return result
 
 
+def extract_req(url_name):
+    """ Extracts the request """
+    
+    args = url_name.split('.com')
+    if len(args) == 2:
+        return args[1] + '/'
+# -----------------------------------------------------------------------------
+
+
+# --------------------------- Socket Functions --------------------------------
 def soc_connect(host_name, port=80):
     """ Socket Creation """
 
@@ -60,13 +72,6 @@ def soc_connect(host_name, port=80):
         sys.exit(1)
 
     return s
-
-def extract_req(url_name):
-    """ Extracts the request """
-    
-    args = url_name.split('.com')
-    if len(args) == 2:
-        return args[1] + '/'
 
 
 def get_data(url_name, s, port=80):
@@ -102,22 +107,12 @@ def get_data(url_name, s, port=80):
         response += buf.decode('cp1252')
 
     return response, parse_url(url_name)
+# -----------------------------------------------------------------------------
 
 
-def resp_write(path, http_resp):
-    """ Wrting on to the file """
-
-    file_name = extract_req(path)
-    file_name = file_name.replace('/', '').strip('/')
-    file_path = parse_url(path).replace('/', '')
-    file_name = file_path + '-' + file_name
-    if not file_name:
-        file_name = 'something'
-    with open(file_name, 'w+') as outputfile:
-        outputfile.write(http_resp)
-
+# ----------------------- Data Processing Functions ---------------------------
 def parse_http_headers(resp_data, url):
-    """ Parse's the http headers """
+    """ Parse's the http headers and html data """
     
     content = resp_data
     resp_headers, resp_html = content.split('\r\n\r\n')
@@ -131,6 +126,7 @@ def parse_http_headers(resp_data, url):
         header_maps[key.lower()] = val.lower()
 
     date_created = header_maps['date']
+    date = None
 
     if 'last-modified' in header_maps.keys():
         date = header_maps['last-modified']
@@ -146,6 +142,8 @@ def parse_http_headers(resp_data, url):
 
 
 def process_resp(status_code, location, date, http_resp):
+    """ Response to the data recvd. """
+
     if status_code == 301 or status_code == 302:
         print(f'Status Code: {status_code} redirecting to: {location}')
         skt = soc_connect(location, port=80)
@@ -161,6 +159,21 @@ def process_resp(status_code, location, date, http_resp):
             print('Last-Modified: ', date)
         resp_write(location, http_resp)
 
+
+def resp_write(path, http_resp):
+    """ Wrting on to the file """
+
+    file_name = extract_req(path)
+    file_name = file_name.replace('/', '').strip('/')
+    file_path = parse_url(path).replace('/', '')
+    file_name = file_path + '-' + file_name
+    if not file_name:
+        file_name = 'something'
+    with open(file_name, 'w+') as outputfile:
+        outputfile.write(http_resp)
+# -----------------------------------------------------------------------------
+
+
 def main():
     """ This is the main function """
 
@@ -170,5 +183,6 @@ def main():
     status_code, url, date, http_resp = parse_http_headers(resp_data, url)
     process_resp(status_code, url, date, http_resp)
     
+
 if __name__ == '__main__':
     main()
