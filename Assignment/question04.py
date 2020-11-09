@@ -8,7 +8,7 @@ def get_args():
     """ Getting in the arguements """
 
     parser = argparse.ArgumentParser(description='Socket error examples')
-    parser.add_argument('--host', action="store", dest="host", required=False)
+    parser.add_argument('-h', '--host', action="store", dest="host", required=False)
     given_args = parser.parse_args()
     host = given_args.host
 
