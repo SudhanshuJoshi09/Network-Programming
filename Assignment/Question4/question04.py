@@ -1,45 +1,67 @@
 #!/usr/bin/env python3 
 
-import sys, argparse, socket, datetime, select, re, os
+import sys, argparse, socket, datetime, select, re, os, json
+from urllib.parse import urlparse
+from pathlib import Path
 
+CACHE = {}
 
 # Utility Functions -----------------------------------------------------------
+def get_cache():
+    """ Retrives cache from json to dict format """
+
+    global CACHE
+    try:
+        with open('cache.json') as json_file:
+            CACHE = json.load(json_file)
+    except:
+        print('Cache file not present')
+        with open('cache.json', 'w+') as json_file:
+            pass
+
+
+def update_cache(url, date):
+    """ Maps url with the last-modified header """
+
+    for link in cache.keys():
+        if parse_url(url).hostname == parse_url(link).hostname and \
+            parse_url(url).path == parse_url(link).path:
+            break
+    else:
+        cache[url] = {'last-modified': date}
+        with open('cache.json', 'w') as outputfile:
+            json.dump(cache, outputfile)
+    
+
+
 def get_args():
     """ Getting in the arguements """
 
     parser = argparse.ArgumentParser(description='Socket error examples')
-    parser.add_argument('-h', '--host', action="store", dest="host", required=False)
+    parser.add_argument('--u', '--url', action="store", dest="url", required=False)
     given_args = parser.parse_args()
-    host = given_args.host
+    url = given_args.url
 
-    return host
-
-
-def parse_url(url, hostname = True):
-    """ Parsing url into hostname and formated url """
-
-    if hostname:
-        result = re.sub(r'(.*://)?([^/?]+).*', '\g<1>\g<2>', url)
-        result = result.strip('http://')
-        result = result.strip('https://')
-    else:
-        result = url
-        result = result.replace("http://","")
-        result = result.replace("https://","")
-        if result[-1] == '/':
-            result = result[:len(result) - 1]
-        if result[:3] != 'www':
-            result = 'www.' + result
-
-    return result
+    return url
 
 
-def extract_req(url_name):
-    """ Extracts the request """
-    
-    args = url_name.split('.com')
-    if len(args) == 2:
-        return args[1] + '/'
+def parse_url(url, type='hostname'):
+    """ Parses the url into domain and request path """
+
+    url = url.replace('http://', '')
+    url = url.replace('https://', '')
+    url = "//" + url
+    res = urlparse(url)
+
+    if type == 'hostname':
+        return res.netloc
+    elif type == 'path':
+        if res.path == '':
+            return '/'
+        return res.path
+    elif type == 'ip':
+        return socket.gethostbyname(res.netloc)
+
 # -----------------------------------------------------------------------------
 
 
@@ -51,24 +73,21 @@ def soc_connect(host_name, port=80):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     except socket.error as e:
         print(f'Error Creating socket: {e}')
-        print('Check one')
         sys.exit(1)
 
     try:
-        ip_address = socket.gethostbyname(parse_url(host_name))
+        ip_address = socket.gethostbyname(parse_url(host_name, type='ip'))
     except socket.gaierror as e:
-        print(e)
+        print('Error decoding the ip')
         sys.exit(1)
 
     try:
         s.connect((ip_address, port))
     except socket.gaierror as e:
         print(f'Address relating error: {e}')
-        print('Check two')
         sys.exit(1)
     except socket.error as e:
         print(f'Connection error: {e}')
-        print('Check three')
         sys.exit(1)
 
     return s
@@ -78,14 +97,10 @@ def get_data(url_name, s, port=80):
     """ This is for getting data """
 
     try:
-        if not extract_req(url_name):
-            data = (f'GET / HTTP/1.1\r\nHost: {parse_url(url_name, hostname=False)}\r\n\r\n'.encode())
-        else:
-            data = f'GET {extract_req(url_name)} HTTP/1.0\r\nHost: {parse_url(url_name)}\r\n\r\n'.encode()
+        data = (f'GET {parse_url(url_name, type="path")} HTTP/1.1\r\nHost: {parse_url(url_name)}\r\n\r\n'.encode())
         s.send(data)
     except socket.error as e:
         print(f'Error sending data: {e}')
-        print('Check four')
         sys.exit(1)
     
     response = ''
@@ -93,20 +108,20 @@ def get_data(url_name, s, port=80):
         buf = s.recv(4096)
     except socket.error as e:
         print(f'Error reciveing data: {e}')
-        print('Check five')
         sys.exit(1)
     response += buf.decode('cp1252')
+    print(response)
 
     while buf:
         try:
             buf = s.recv(10000)
+            s.settimeout(1)
         except socket.error as e:
             print(f'Error reciveing data: {e}')
-            print('Check five')
             sys.exit(1)
         response += buf.decode('cp1252')
 
-    return response, parse_url(url_name)
+    return response, url_name
 # -----------------------------------------------------------------------------
 
 
@@ -115,7 +130,7 @@ def parse_http_headers(resp_data, url):
     """ Parse's the http headers and html data """
     
     content = resp_data
-    resp_headers, resp_html = content.split('\r\n\r\n')
+    resp_headers, resp_html = content.split('\r\n\r\n', 1)
     resp_headers = resp_headers.split('\n')
     status_code = int(resp_headers[0].split(' ')[1])
     header_maps = {}
@@ -149,28 +164,41 @@ def process_resp(status_code, location, date, http_resp):
         skt = soc_connect(location, port=80)
         resp_data, url = get_data(location, skt, port=80)
         status_code, url, date, http_resp = parse_http_headers(resp_data, url)
-        process_resp(status_code, location, date, http_resp)
+        process_resp(status_code, url, date, http_resp)
     elif status_code == 403:
         print(f'HTTP/1.1 403 Forbidden\nDate: {date}')
     elif status_code == 404:
         print(f'HTTP/1.1 404 Not Found\nDate: {date}')
     elif status_code == 200:
         if date:
-            print('Last-Modified: ', date)
+            pass
+            #map_urls(url, date)
         resp_write(location, http_resp)
 
 
 def resp_write(path, http_resp):
     """ Wrting on to the file """
 
-    file_name = extract_req(path)
-    file_name = file_name.replace('/', '').strip('/')
-    file_path = parse_url(path).replace('/', '')
-    file_name = file_path + '-' + file_name
-    if not file_name:
-        file_name = 'something'
-    with open(file_name, 'w+') as outputfile:
-        outputfile.write(http_resp)
+    file_name = parse_url(path, type='path')
+    if file_name == '/':
+        file_name = ''
+    base_dir = parse_url(path)
+
+    if file_name == '':
+        file_name = base_dir
+        with open(file_name, 'w+') as outputfile:
+            outputfile.write(http_resp)
+    else:
+        file_name = file_name.split('/')
+        Path(f'{base_dir}' + '/'.join(d for d in file_name[:len(file_name) - 1])).mkdir(parents=True, exist_ok=True)
+        os.chdir(f'{base_dir}'+'/'.join(d for d in file_name[:len(file_name) - 1]))
+        if file_name[-1] == '':
+            file_name[-1] = 'index'
+        with open(file_name[-1], 'w+') as outputfile:
+            outputfile.write(http_resp)
+    
+
+    
 # -----------------------------------------------------------------------------
 
 

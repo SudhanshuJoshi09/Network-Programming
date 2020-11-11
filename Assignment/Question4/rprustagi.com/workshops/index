@@ -1,0 +1,22 @@
+HTTP/1.1 200 OK
+Date: Tue, 10 Nov 2020 18:17:12 GMT
+Server: Apache
+Upgrade: h2,h2c
+Connection: Upgrade
+Last-Modified: Sun, 21 Apr 2019 04:48:50 GMT
+Accept-Ranges: bytes
+Content-Length: 216
+Vary: Accept-Encoding,User-Agent
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Refresh" content="0;url=workshops.html">
+</head>
+
+<body>
+<p>Please wait. You are being redirected to <a href="./workshops.html">workshops.html</a></p>
+</body>
+
+</html>
