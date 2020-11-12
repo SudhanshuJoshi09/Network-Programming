@@ -5,6 +5,14 @@ from urllib.parse import urlparse
 from pathlib import Path
 
 CACHE = {}
+GET_REQ = """\
+GET {} \
+HTTP/1.1\r\n\
+Content-Type: text/html\r\n\
+Host: {}\r\n\
+Connection: close\r\n\
+\r\n\
+"""
 
 # Utility Functions -----------------------------------------------------------
 def get_cache():
@@ -97,7 +105,8 @@ def get_data(url_name, s, port=80):
     """ This is for getting data """
 
     try:
-        data = (f'GET {parse_url(url_name, type="path")} HTTP/1.1\r\nHost: {parse_url(url_name)}\r\n\r\n'.encode())
+        # data = (f'GET {parse_url(url_name, type="path")} HTTP/1.1\r\nContent-Type: text/html\r\nHost: {parse_url(url_name)}\r\n\r\n'.encode())
+        data = GET_REQ.format(parse_url(url_name, type='path'), parse_url(url_name)).encode()
         s.send(data)
     except socket.error as e:
         print(f'Error sending data: {e}')
@@ -110,12 +119,10 @@ def get_data(url_name, s, port=80):
         print(f'Error reciveing data: {e}')
         sys.exit(1)
     response += buf.decode('cp1252')
-    print(response)
 
     while buf:
         try:
             buf = s.recv(10000)
-            s.settimeout(1)
         except socket.error as e:
             print(f'Error reciveing data: {e}')
             sys.exit(1)
