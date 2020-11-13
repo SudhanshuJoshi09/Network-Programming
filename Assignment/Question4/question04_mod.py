@@ -1,45 +1,24 @@
 #!/usr/bin/env python3 
 
-import sys, argparse, socket, datetime, select, re, os, json, ssl
+import request
 from urllib.parse import urlparse
 from pathlib import Path
 
 
-CACHE = {}
-GET_REQ = """\
-GET {} HTTP/1.1\r\n\
-Host: {}\r\n\
-Accept: text/html\r\n\
-User-Agent: Question04\r\n\
-Connection: close\r\n\
-\r\n\
-"""
-CACHE_REQ = """\
-GET {} HTTP/1.1\r\n\
-Host: {}\r\n\
-Accept: text/html\r\n\
-User-Agent: Question04\r\n\
-If-Modified-Since: {}\r\n\
-Connection: close\r\n\
-\r\n\
-"""
+parser = argparse.ArgumentParser()
+parser.add_argument('--u', '--url', action="store", dest="url", required=False)
+given_args = parser.parse_args()
+url = given_args.url
 
+file = {}
+try:
+    with open('file.json', 'r') as data_file:
+        file = json.load(data_file)
+except:
+    with open('file.json', 'w+') as data_file:
+        pass
 
-# ----------------------------- CACHE Functions ---------------------------------
-def load_cache():
-    """ Retrives cache from json to dict format """
-
-    global CACHE
-    try:
-        with open('cache.json', 'r') as json_file:
-            CACHE = json.load(json_file)
-    except:
-        print('Cache file not present')
-        with open('cache.json', 'w+') as json_file:
-            pass
-
-
-def cache_mod(url, date=None):
+def store_data(url, date=None):
     """ Maps url with the last-modified header """
 
     if date:
@@ -58,21 +37,7 @@ def cache_mod(url, date=None):
                 return CACHE[url]['last-modified']
         else:
             return None
-# ---------------------------------------------------------------------------------
-
-
-# ------------------------------- Utility Functions -------------------------------
-def get_args():
-    """ Getting in the arguements """
-
-    parser = argparse.ArgumentParser(description='Socket error examples')
-    parser.add_argument('--u', '--url', action="store", dest="url", required=False)
-    given_args = parser.parse_args()
-    url = given_args.url
-
-    return url
-
-
+# This is for when we create the file.
 def parse_url(url, type='hostname'):
     """ Parses the url into domain and request path """
 
@@ -115,7 +80,7 @@ def soc_connect(host_name, port=80):
         else:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             ss = ssl.wrap_socket(s, keyfile=None, certfile=None, server_side=False, 
-                                cert_reqs=ssl.CERT_NONE, ssl_version=ssl.PROTOCOL_TLSv1_2)
+                                cert_reqs=ssl.CERT_NONE, ssl_version=ssl.PROTOCOL_SSLv3)
     except socket.error as e:
         print(f'Error Creating socket: {e}')
         sys.exit(1)
@@ -186,7 +151,7 @@ def parse_http_headers(resp_data, url):
     base_url = url
 
     for i in range(1, len(resp_headers)):
-        key, val = resp_headers[i].strip('\r').split(': ', 1)
+        key, val = resp_headers[i].strip('\r').split(': ')
         header_maps[key.lower()] = val
 
     date_created = header_maps['date']

@@ -1,8 +1,8 @@
 HTTP/1.1 200 OK
-Date: Tue, 10 Nov 2020 18:17:12 GMT
+Date: Fri, 13 Nov 2020 09:34:52 GMT
 Server: Apache
 Upgrade: h2,h2c
-Connection: Upgrade
+Connection: Upgrade, close
 Last-Modified: Sun, 21 Apr 2019 04:48:50 GMT
 Accept-Ranges: bytes
 Content-Length: 216
