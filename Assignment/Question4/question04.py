@@ -9,9 +9,11 @@ GET_REQ = """\
 GET {} HTTP/1.1\r\n\
 Host: {}\r\n\
 Accept: text/html\r\n\
+User-Agent: Question04\r\n\
 Connection: close\r\n\
 \r\n\
 """
+
 
 # Utility Functions -----------------------------------------------------------
 def get_cache():
@@ -85,19 +87,18 @@ def soc_connect(host_name, port=80):
     try:
         ip_address = socket.gethostbyname(parse_url(host_name, type='ip'))
         port = parse_url(host_name, 'protocol')
-        print(port)
     except socket.gaierror as e:
         print('Error decoding the ip')
         sys.exit(1)
-    print(ip_address)
-    print(type(port))
 
     try:
         if port == 80:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         else:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            ss = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)  
+            ss = ssl.wrap_socket(s, keyfile=None, certfile=None, server_side=False, 
+                                cert_reqs=ssl.CERT_NONE, ssl_version=ssl.PROTOCOL_TLSv1_2)
+            #ss = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)  
     except socket.error as e:
         print(f'Error Creating socket: {e}')
         sys.exit(1)
@@ -123,7 +124,6 @@ def get_data(url_name, s, port=80):
     """ This is for getting data """
 
     try:
-        # data = (f'GET {parse_url(url_name, type="path")} HTTP/1.1\r\nContent-Type: text/html\r\nHost: {parse_url(url_name)}\r\n\r\n'.encode())
         data = GET_REQ.format(parse_url(url_name, type='path'), parse_url(url_name)).encode()
         print(data)
         s.send(data)
@@ -149,7 +149,6 @@ def get_data(url_name, s, port=80):
         response += buf.decode('cp437')
         #response += buf.decode('cp1252')
 
-    print(response)
     return response, url_name
 # -----------------------------------------------------------------------------
 
@@ -219,20 +218,18 @@ def resp_write(path, http_resp):
             outputfile.write(http_resp)
     else:
         file_name = file_name.split('/')
-        Path(f'{base_dir}' + '/'.join(d for d in file_name[:len(file_name) - 1])).mkdir(parents=True, exist_ok=True)
+        Path(f'{base_dir}' + '/'.join(d for d in file_name[:len(file_name) - 1]))\
+            .mkdir(parents=True, exist_ok=True)
         os.chdir(f'{base_dir}'+'/'.join(d for d in file_name[:len(file_name) - 1]))
         if file_name[-1] == '':
             file_name[-1] = 'index'
         with open(file_name[-1], 'w+') as outputfile:
             outputfile.write(http_resp)
-    
 
     
 # -----------------------------------------------------------------------------
-
-
 def main():
-    """ This is the main function """
+    """ main Funtion """
 
     host_name = get_args()
     skt = soc_connect(host_name)
