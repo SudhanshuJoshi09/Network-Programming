@@ -1,15 +1,14 @@
 #!/usr/bin/env python3 
 
-import sys, argparse, socket, datetime, select, re, os, json
+import sys, argparse, socket, datetime, select, re, os, json, ssl
 from urllib.parse import urlparse
 from pathlib import Path
 
 CACHE = {}
 GET_REQ = """\
-GET {} \
-HTTP/1.1\r\n\
-Content-Type: text/html\r\n\
+GET {} HTTP/1.1\r\n\
 Host: {}\r\n\
+Accept: text/html\r\n\
 Connection: close\r\n\
 \r\n\
 """
@@ -56,6 +55,12 @@ def get_args():
 def parse_url(url, type='hostname'):
     """ Parses the url into domain and request path """
 
+    if type == 'protocol':
+        if url.find('https://') != -1:
+            return 443
+        else:
+            return 80
+
     url = url.replace('http://', '')
     url = url.replace('https://', '')
     url = "//" + url
@@ -79,18 +84,22 @@ def soc_connect(host_name, port=80):
 
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        ss = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)  
     except socket.error as e:
         print(f'Error Creating socket: {e}')
         sys.exit(1)
 
     try:
         ip_address = socket.gethostbyname(parse_url(host_name, type='ip'))
+        port = parse_url(host_name, 'protocol')
+        print(port)
     except socket.gaierror as e:
         print('Error decoding the ip')
         sys.exit(1)
+    print(ip_address)
 
     try:
-        s.connect((ip_address, port))
+        ss.connect((ip_address, port))
     except socket.gaierror as e:
         print(f'Address relating error: {e}')
         sys.exit(1)
@@ -98,7 +107,7 @@ def soc_connect(host_name, port=80):
         print(f'Connection error: {e}')
         sys.exit(1)
 
-    return s
+    return ss
 
 
 def get_data(url_name, s, port=80):
@@ -107,6 +116,7 @@ def get_data(url_name, s, port=80):
     try:
         # data = (f'GET {parse_url(url_name, type="path")} HTTP/1.1\r\nContent-Type: text/html\r\nHost: {parse_url(url_name)}\r\n\r\n'.encode())
         data = GET_REQ.format(parse_url(url_name, type='path'), parse_url(url_name)).encode()
+        print(data)
         s.send(data)
     except socket.error as e:
         print(f'Error sending data: {e}')
@@ -118,7 +128,8 @@ def get_data(url_name, s, port=80):
     except socket.error as e:
         print(f'Error reciveing data: {e}')
         sys.exit(1)
-    response += buf.decode('cp1252')
+    #response += buf.decode('cp1252')
+    response += buf.decode('cp437')
 
     while buf:
         try:
@@ -126,8 +137,10 @@ def get_data(url_name, s, port=80):
         except socket.error as e:
             print(f'Error reciveing data: {e}')
             sys.exit(1)
-        response += buf.decode('cp1252')
+        response += buf.decode('cp437')
+        #response += buf.decode('cp1252')
 
+    print(response)
     return response, url_name
 # -----------------------------------------------------------------------------
 
