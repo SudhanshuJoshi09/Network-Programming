@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 from pathlib import Path
 
 CACHE = {}
+
 GET_REQ = """\
 GET {} HTTP/1.1\r\n\
 Host: {}\r\n\
@@ -14,14 +15,24 @@ Connection: close\r\n\
 \r\n\
 """
 
+CACHE_REQ = """\
+GET {} HTTP/1.1\r\n\
+Host: {}\r\n\
+Accept: text/html\r\n\
+User-Agent: Question04\r\n\
+If-Modified-Since: {}\r\n\
+Connection: close\r\n\
+\r\n\
+"""
+
 
 # Utility Functions -----------------------------------------------------------
-def get_cache():
+def load_cache():
     """ Retrives cache from json to dict format """
 
     global CACHE
     try:
-        with open('cache.json') as json_file:
+        with open('cache.json', 'r') as json_file:
             CACHE = json.load(json_file)
     except:
         print('Cache file not present')
@@ -29,18 +40,25 @@ def get_cache():
             pass
 
 
-def update_cache(url, date):
+def cache_mod(url, date=None):
     """ Maps url with the last-modified header """
 
-    for link in cache.keys():
-        if parse_url(url).hostname == parse_url(link).hostname and \
-            parse_url(url).path == parse_url(link).path:
-            break
+    if date:
+        for link in CACHE.keys():
+            if parse_url(url) == parse_url(link) and \
+                parse_url(url, type='path') == parse_url(link, type='path'):
+                break
+        else:
+            CACHE[url] = {'last-modified': date}
+            with open('cache.json', 'w') as outputfile:
+                json.dump(CACHE, outputfile)
     else:
-        cache[url] = {'last-modified': date}
-        with open('cache.json', 'w') as outputfile:
-            json.dump(cache, outputfile)
-    
+        for link in CACHE.keys():
+            if parse_url(url) == parse_url(link) and \
+                parse_url(url, type='path') == parse_url(link, type='path'):
+                return CACHE[url]['last-modified']
+        else:
+            return None
 
 
 def get_args():
@@ -98,7 +116,6 @@ def soc_connect(host_name, port=80):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             ss = ssl.wrap_socket(s, keyfile=None, certfile=None, server_side=False, 
                                 cert_reqs=ssl.CERT_NONE, ssl_version=ssl.PROTOCOL_TLSv1_2)
-            #ss = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)  
     except socket.error as e:
         print(f'Error Creating socket: {e}')
         sys.exit(1)
@@ -124,9 +141,14 @@ def get_data(url_name, s, port=80):
     """ This is for getting data """
 
     try:
-        data = GET_REQ.format(parse_url(url_name, type='path'), parse_url(url_name)).encode()
-        print(data)
-        s.send(data)
+        date = cache_mod(url_name)
+        if date:
+            data = CACHE_REQ.format(parse_url(url_name, type='path'), parse_url(url_name), date).encode()
+            print(data)
+            s.send(data)
+        else:
+            data = GET_REQ.format(parse_url(url_name, type='path'), parse_url(url_name)).encode()
+            s.send(data)
     except socket.error as e:
         print(f'Error sending data: {e}')
         sys.exit(1)
@@ -181,6 +203,8 @@ def parse_http_headers(resp_data, url):
     elif status_code == 404:
         return (status_code, None, date_created, None)
     elif status_code == 200:
+        if date:
+            cache_mod(url, date)
         return (status_code, base_url, date, content)
 
 
@@ -231,6 +255,7 @@ def resp_write(path, http_resp):
 def main():
     """ main Funtion """
 
+    load_cache()
     host_name = get_args()
     skt = soc_connect(host_name)
     resp_data, url = get_data(host_name, skt, port=80)
