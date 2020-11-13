@@ -229,7 +229,7 @@ def process_resp(status_code, location, date, http_resp):
 
 
 def resp_write(path, http_resp):
-    """ Wrting on to the file """
+    """ Writing on to the file """
 
     file_name = parse_url(path, type='path')
     if file_name == '/':
@@ -249,9 +249,9 @@ def resp_write(path, http_resp):
             file_name[-1] = 'index'
         with open(file_name[-1], 'w+') as outputfile:
             outputfile.write(http_resp)
+# -----------------------------------------------------------------------------
 
     
-# -----------------------------------------------------------------------------
 def main():
     """ main Funtion """
 

@@ -60,119 +60,6 @@ def parse_url(url, type='hostname'):
         return res.path
     elif type == 'ip':
         return socket.gethostbyname(res.netloc)
-# -----------------------------------------------------------------------------
-
-
-# --------------------------- Socket Functions --------------------------------
-def soc_connect(host_name, port=80):
-    """ Socket Creation """
-
-    try:
-        ip_address = socket.gethostbyname(parse_url(host_name, type='ip'))
-        port = parse_url(host_name, 'protocol')
-    except socket.gaierror as e:
-        print('Error decoding the ip')
-        sys.exit(1)
-
-    try:
-        if port == 80:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        else:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            ss = ssl.wrap_socket(s, keyfile=None, certfile=None, server_side=False, 
-                                cert_reqs=ssl.CERT_NONE, ssl_version=ssl.PROTOCOL_SSLv3)
-    except socket.error as e:
-        print(f'Error Creating socket: {e}')
-        sys.exit(1)
-
-    try:
-        if port == 80:
-            s.connect((ip_address, port))
-        else:
-            ss.connect((ip_address, port))
-    except socket.gaierror as e:
-        print(f'Address relating error: {e}')
-        sys.exit(1)
-    except socket.error as e:
-        print(f'Connection error: {e}')
-        sys.exit(1)
-
-    if port == 80:
-        return s
-    return ss
-
-
-def get_data(url_name, s, port=80):
-    """ This is for getting data """
-
-    try:
-        date = cache_mod(url_name)
-        if date:
-            data = CACHE_REQ.format(parse_url(url_name, type='path'), parse_url(url_name), date).encode()
-            s.send(data)
-        else:
-            data = GET_REQ.format(parse_url(url_name, type='path'), parse_url(url_name)).encode()
-            s.send(data)
-    except socket.error as e:
-        print(f'Error sending data: {e}')
-        sys.exit(1)
-    
-    response = ''
-    try:
-        buf = s.recv(4096)
-    except socket.error as e:
-        print(f'Error reciveing data: {e}')
-        sys.exit(1)
-    #response += buf.decode('cp1252')
-    response += buf.decode('cp437')
-
-    while buf:
-        try:
-            buf = s.recv(10000)
-        except socket.error as e:
-            print(f'Error reciveing data: {e}')
-            sys.exit(1)
-        response += buf.decode('cp437')
-        #response += buf.decode('cp1252')
-
-    return response, url_name
-# -----------------------------------------------------------------------------
-
-
-# ----------------------- Data Processing Functions ---------------------------
-def parse_http_headers(resp_data, url):
-    """ Parse's the http headers and html data """
-    
-    content = resp_data
-    resp_headers, resp_html = content.split('\r\n\r\n', 1)
-    resp_headers = resp_headers.split('\n')
-    status_code = int(resp_headers[0].split(' ')[1])
-    header_maps = {}
-    base_url = url
-
-    for i in range(1, len(resp_headers)):
-        key, val = resp_headers[i].strip('\r').split(': ')
-        header_maps[key.lower()] = val
-
-    date_created = header_maps['date']
-    date = None
-
-    if 'last-modified' in header_maps.keys():
-        date = header_maps['last-modified']
-
-    if status_code == 301 or status_code == 302:
-        return (status_code, header_maps['location'], None, None)
-    elif status_code == 403:
-        return (status_code, None, date_created, None)
-    elif status_code == 404:
-        return (status_code, None, date_created, None)
-    elif status_code == 200:
-        if date:
-            cache_mod(url, date)
-        return (status_code, base_url, date, content)
-    elif status_code == 304:
-        return (status_code, None, date_created, None)
-
 
 def process_resp(status_code, location, date, http_resp):
     """ Response to the data recvd. """
@@ -219,13 +106,6 @@ def resp_write(path, http_resp):
 # -----------------------------------------------------------------------------
 def main():
     """ main Funtion """
-
-    load_cache()
-    host_name = get_args()
-    skt = soc_connect(host_name)
-    resp_data, url = get_data(host_name, skt, port=80)
-    status_code, url, date, http_resp = parse_http_headers(resp_data, url)
-    process_resp(status_code, url, date, http_resp)
     
 
 if __name__ == '__main__':
