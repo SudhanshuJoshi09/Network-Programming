@@ -144,7 +144,6 @@ def get_data(url_name, s, port=80):
         date = cache_mod(url_name)
         if date:
             data = CACHE_REQ.format(parse_url(url_name, type='path'), parse_url(url_name), date).encode()
-            print(data)
             s.send(data)
         else:
             data = GET_REQ.format(parse_url(url_name, type='path'), parse_url(url_name)).encode()
@@ -188,7 +187,7 @@ def parse_http_headers(resp_data, url):
 
     for i in range(1, len(resp_headers)):
         key, val = resp_headers[i].strip('\r').split(': ')
-        header_maps[key.lower()] = val.lower()
+        header_maps[key.lower()] = val
 
     date_created = header_maps['date']
     date = None
@@ -206,6 +205,8 @@ def parse_http_headers(resp_data, url):
         if date:
             cache_mod(url, date)
         return (status_code, base_url, date, content)
+    elif status_code == 304:
+        return (status_code, None, date_created, None)
 
 
 def process_resp(status_code, location, date, http_resp):
@@ -222,10 +223,9 @@ def process_resp(status_code, location, date, http_resp):
     elif status_code == 404:
         print(f'HTTP/1.1 404 Not Found\nDate: {date}')
     elif status_code == 200:
-        if date:
-            pass
-            #map_urls(url, date)
         resp_write(location, http_resp)
+    elif status_code == 304:
+        print(f'HTTP/1.1 304 Not Modified\nDate: {date}')
 
 
 def resp_write(path, http_resp):
