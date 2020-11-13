@@ -83,13 +83,6 @@ def soc_connect(host_name, port=80):
     """ Socket Creation """
 
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ss = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)  
-    except socket.error as e:
-        print(f'Error Creating socket: {e}')
-        sys.exit(1)
-
-    try:
         ip_address = socket.gethostbyname(parse_url(host_name, type='ip'))
         port = parse_url(host_name, 'protocol')
         print(port)
@@ -97,9 +90,23 @@ def soc_connect(host_name, port=80):
         print('Error decoding the ip')
         sys.exit(1)
     print(ip_address)
+    print(type(port))
 
     try:
-        ss.connect((ip_address, port))
+        if port == 80:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        else:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            ss = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)  
+    except socket.error as e:
+        print(f'Error Creating socket: {e}')
+        sys.exit(1)
+
+    try:
+        if port == 80:
+            s.connect((ip_address, port))
+        else:
+            ss.connect((ip_address, port))
     except socket.gaierror as e:
         print(f'Address relating error: {e}')
         sys.exit(1)
@@ -107,6 +114,8 @@ def soc_connect(host_name, port=80):
         print(f'Connection error: {e}')
         sys.exit(1)
 
+    if port == 80:
+        return s
     return ss
 
 
