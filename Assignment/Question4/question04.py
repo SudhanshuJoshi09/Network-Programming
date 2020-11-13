@@ -4,8 +4,8 @@ import sys, argparse, socket, datetime, select, re, os, json, ssl
 from urllib.parse import urlparse
 from pathlib import Path
 
-CACHE = {}
 
+CACHE = {}
 GET_REQ = """\
 GET {} HTTP/1.1\r\n\
 Host: {}\r\n\
@@ -14,7 +14,6 @@ User-Agent: Question04\r\n\
 Connection: close\r\n\
 \r\n\
 """
-
 CACHE_REQ = """\
 GET {} HTTP/1.1\r\n\
 Host: {}\r\n\
@@ -26,7 +25,7 @@ Connection: close\r\n\
 """
 
 
-# Utility Functions -----------------------------------------------------------
+# ----------------------------- CACHE Functions ---------------------------------
 def load_cache():
     """ Retrives cache from json to dict format """
 
@@ -59,8 +58,10 @@ def cache_mod(url, date=None):
                 return CACHE[url]['last-modified']
         else:
             return None
+# ---------------------------------------------------------------------------------
 
 
+# ------------------------------- Utility Functions -------------------------------
 def get_args():
     """ Getting in the arguements """
 
@@ -94,7 +95,6 @@ def parse_url(url, type='hostname'):
         return res.path
     elif type == 'ip':
         return socket.gethostbyname(res.netloc)
-
 # -----------------------------------------------------------------------------
 
 
