@@ -1,6 +1,6 @@
 #!/usr/bin/env python3 
 
-import sys, argparse, socket, datetime, select, re, os, json, ssl
+import sys, argparse, socket, os, json, ssl
 from urllib.parse import urlparse
 from pathlib import Path
 
@@ -34,7 +34,6 @@ def load_cache():
         with open('cache.json', 'r') as json_file:
             CACHE = json.load(json_file)
     except:
-        print('Cache file not present')
         with open('cache.json', 'w+') as json_file:
             pass
 
@@ -66,7 +65,7 @@ def get_args():
     """ Getting in the arguements """
 
     parser = argparse.ArgumentParser(description='Socket error examples')
-    parser.add_argument('--u', '--url', action="store", dest="url", required=False)
+    parser.add_argument('-u', '-url', action="store", dest="url", required=False)
     given_args = parser.parse_args()
     url = given_args.url
 
@@ -99,7 +98,7 @@ def parse_url(url, type='hostname'):
 
 
 # --------------------------- Socket Functions --------------------------------
-def soc_connect(host_name, port=80):
+def soc_connect(host_name):
     """ Socket Creation """
 
     try:
@@ -112,24 +111,14 @@ def soc_connect(host_name, port=80):
     try:
         if port == 80:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((ip_address, port))
         else:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((ip_address, port))
             ss = ssl.wrap_socket(s, keyfile=None, certfile=None, server_side=False, 
                                 cert_reqs=ssl.CERT_NONE, ssl_version=ssl.PROTOCOL_TLSv1_2)
     except socket.error as e:
         print(f'Error Creating socket: {e}')
-        sys.exit(1)
-
-    try:
-        if port == 80:
-            s.connect((ip_address, port))
-        else:
-            ss.connect((ip_address, port))
-    except socket.gaierror as e:
-        print(f'Address relating error: {e}')
-        sys.exit(1)
-    except socket.error as e:
-        print(f'Connection error: {e}')
         sys.exit(1)
 
     if port == 80:
@@ -137,7 +126,7 @@ def soc_connect(host_name, port=80):
     return ss
 
 
-def get_data(url_name, s, port=80):
+def get_data(url_name, s):
     """ This is for getting data """
 
     try:
@@ -168,7 +157,6 @@ def get_data(url_name, s, port=80):
             print(f'Error reciveing data: {e}')
             sys.exit(1)
         response += buf.decode('cp437')
-        #response += buf.decode('cp1252')
 
     return response, url_name
 # -----------------------------------------------------------------------------
@@ -214,8 +202,8 @@ def process_resp(status_code, location, date, http_resp):
 
     if status_code == 301 or status_code == 302:
         print(f'Status Code: {status_code} redirecting to: {location}')
-        skt = soc_connect(location, port=80)
-        resp_data, url = get_data(location, skt, port=80)
+        skt = soc_connect(location)
+        resp_data, url = get_data(location, skt)
         status_code, url, date, http_resp = parse_http_headers(resp_data, url)
         process_resp(status_code, url, date, http_resp)
     elif status_code == 403:
@@ -258,7 +246,7 @@ def main():
     load_cache()
     host_name = get_args()
     skt = soc_connect(host_name)
-    resp_data, url = get_data(host_name, skt, port=80)
+    resp_data, url = get_data(host_name, skt)
     status_code, url, date, http_resp = parse_http_headers(resp_data, url)
     process_resp(status_code, url, date, http_resp)
     

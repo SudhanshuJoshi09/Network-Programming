@@ -1,0 +1,362 @@
+HTTP/1.1 200 OK
+Server: nginx/1.17.10 (Ubuntu)
+Date: Sat, 14 Nov 2020 13:14:14 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: close
+X-Content-Type-Options: nosniff
+Content-language: en
+Vary: Accept-Encoding, DNT, Cookie
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, must-revalidate, max-age=0
+Last-Modified: Sun, 19 Jul 2020 17:26:47 GMT
+
+1ee0
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>last-modified-examples - Microformats Wiki</title>
+<script>document.documentElement.className="client-js";RLCONF={"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":!1,"wgNamespaceNumber":0,"wgPageName":"last-modified-examples","wgTitle":"last-modified-examples","wgCurRevisionId":65543,"wgRevisionId":65543,"wgArticleId":1143,"wgIsArticle":!0,"wgIsRedirect":!1,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":!1,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"last-modified-examples","wgRelevantArticleId":1143,"wgRequestId":"729ac03aedb648ad0e6fd5db","wgCSPNonce":!1,"wgIsProbablyEditable":!1,"wgRelevantPageIsProbablyEditable":!1,
+"wgRestrictionEdit":[],"wgRestrictionMove":[]};RLSTATE={"site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"ready","user.tokens":"loading","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.toc.styles":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready"};RLPAGEMODULES=["site","mediawiki.page.startup","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","skins.vector.js"];</script>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.tokens@tffin",function($,jQuery,require,module){/*@nomin*/mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});
+});});</script>
+<link rel="stylesheet" href="/wiki/load.php?lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.interface%7Cmediawiki.toc.styles%7Cskins.vector.styles&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/wiki/load.php?lang=en&amp;modules=startup&amp;only=scripts&amp;raw=1&amp;skin=vector"></script>
+<meta name="generator" content="MediaWiki 1.34.1"/>
+<link rel="shortcut icon" href="/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="Microformats Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//microformats.org/wiki/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Microformats Wiki Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom"/>
+<!--[if lt IE 9]><script src="/wiki/resources/lib/html5shiv/html5shiv.js"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-last-modified-examples rootpage-last-modified-examples skin-vector action-view">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	
+	<div class="mw-indicators mw-body-content">
+</div>
+
+	<h1 id="firstHeading" class="firstHeading" lang="en">last-modified-examples</h1>
+	
+	<div id="bodyContent" class="mw-body-content">
+		<div id="siteSub" class="noprint">From Microformats Wiki</div>
+		<div id="contentSub"></div>
+		
+		
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#p-search">Jump to search</a>
+		<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><div id="toc" class="toc"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2>Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#.22Last_modified.22_and_.22published.22_examples"><span class="tocnumber">1</span> <span class="toctext">"Last modified" and "published" examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Contributors"><span class="tocnumber">1.1</span> <span class="toctext">Contributors</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#.22Last_modified.22_examples"><span class="tocnumber">1.2</span> <span class="toctext">"Last modified" examples</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="#Content_management_and_content_publishing_software"><span class="tocnumber">1.2.1</span> <span class="toctext">Content management and content publishing software</span></a></li>
+<li class="toclevel-3 tocsection-17"><a href="#Individual_web_sites"><span class="tocnumber">1.2.2</span> <span class="toctext">Individual web sites</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-21"><a href="#.22Published.22_examples"><span class="tocnumber">1.3</span> <span class="toctext">"Published" examples</span></a>
+<ul>
+<li class="toclevel-3 tocsection-22"><a href="#Content_management_and_content_publishing_software_2"><span class="tocnumber">1.3.1</span> <span class="toctext">Content management and content publishing software</span></a></li>
+<li class="toclevel-3 tocsection-32"><a href="#Individual_web_sites_2"><span class="tocnumber">1.3.2</span> <span class="toctext">Individual web sites</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-34"><a href="#See_also"><span class="tocnumber">1.4</span> <span class="toctext">See also</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span id="&quot;Last_modified&quot;_and_&quot;published&quot;_examples"></span><span class="mw-headline" id=".22Last_modified.22_and_.22published.22_examples">"Last modified" and "published" examples</span></h1>
+<p>Many web pages display the date of the last modification and/or the date of their publication.
+This datetimes could be made machine-readable using <a href="/wiki/datetime-design-pattern" title="datetime-design-pattern">Datetime Design Pattern</a>.
+</p><p>The purpose of this wiki page is to collect real-world examples of web pages which display the date of their last modification and how this is done, towards the development of a <a href="/wiki/last-modified" title="last-modified">last-modified</a> microformat.
+</p>
+<h2><span class="mw-headline" id="Contributors">Contributors</span></h2>
+<ul><li><a href="/wiki/User:RobertBachmann" title="User:RobertBachmann">Robert Bachmann</a> (initial author)</li></ul>
+<p><br />
+If you contribute real-world examples, please add your name here.
+</p>
+<h2><span id="&quot;Last_modified&quot;_examples"></span><span class="mw-headline" id=".22Last_modified.22_examples">"Last modified" examples</span></h2>
+<h3><span class="mw-headline" id="Content_management_and_content_publishing_software">Content management and content publishing software</span></h3>
+<p>Note: The date format used by the CMS systems may vary per skin/theme.
+</p>
+<h4><span class="mw-headline" id="coWiki">coWiki</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.cowiki.org/142.html">http://www.cowiki.org/142.html</a>:
+</p><p>&#8220;Modified: 20 Feb 05, 19:57&#8221; is displayed at the bottom of the page.
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="DokuWiki">DokuWiki</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://wiki.splitbrain.org/wiki:dokuwiki">http://wiki.splitbrain.org/wiki:dokuwiki</a>:
+</p><p>&#8220;Last modified: 2005-08-01 20:10&#8221; is displayed at the bottom of the page.
+(it is written in grey color in the right corner) 
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="MoinMoin">MoinMoin</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://moinmoin.wikiw
+2000
+ikiweb.de/">http://moinmoin.wikiwikiweb.de/</a>:
+</p><p>&#8220;last edited 2005-08-04 20:56:50 by ...&#8221; is displayed at the bottom of the page.
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="GetWiki">GetWiki</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.getwiki.net/wiki.php">http://www.getwiki.net/wiki.php</a>:
+</p><p>&#8220;last modified 19:04, 17 Jul 2005&#8221; is displayed at the bottom of the
+page.
+</p><p>&#8220;Last-modified: Sun, 17 Jul 2005 19:04:43 GMT&#8221; is sent by the server.
+</p>
+<h4><span class="mw-headline" id="Mediawiki">Mediawiki</span></h4>
+<p>Example from <a class="external free" href="http://www.mediawiki.org/wiki/MediaWiki">http://www.mediawiki.org/wiki/MediaWiki</a>:
+</p><p>&#8220;This page was last modified 04:22, 24 August 2005.&#8221; is displayed in
+the bottom of the page.
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="Perspective">Perspective</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.high-beyond.com/perspective.aspx?action=view&amp;page=documentation:Index">http://www.high-beyond.com/perspective.aspx?action=view&amp;page=documentation:Index</a>:
+</p><p>&#8220;Last Edited:   6/Jul/05 19:25:22 by Alan Slater&#8221; is displayed at the top of the page.
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="PhpWiki">PhpWiki</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://phpwiki.sourceforge.net/phpwiki/">http://phpwiki.sourceforge.net/phpwiki/</a>:
+</p><p>&#8220;Last edited on Tuesday, July 5, 2005 10:07:12 pm by "wikimaster"&#8221; is displayed at the bottom of the page.
+</p><p>&#8220;Last-Modified: Wed, 06 Jul 2005 05:07:12 GMT&#8221; is sent by the server.
+</p>
+<h4><span class="mw-headline" id="PmWiki">PmWiki</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.pmwiki.org/wiki/PmWiki/PmWiki">http://www.pmwiki.org/wiki/PmWiki/PmWiki</a>:
+</p><p>&#8220;Page last modified on August 28, 2005, at 05:24 PM&#8221; is displayed at the bottom of the page.
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="TWiki">TWiki</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://twiki.org/cgi-bin/view/TWiki/WebHome">http://twiki.org/cgi-bin/view/TWiki/WebHome</a>:
+</p><p>&#8220;12 Aug 2005 - 16:37 - JoaquimFerreira&#8221; is displayed at the top of the page.
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="Wikka">Wikka</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://wikka.jsnx.com/HomePage">http://wikka.jsnx.com/HomePage</a>:
+</p><p>&#8220;2005-08-28 12:25:55&#8221; is displayed ath the bottom of the page.
+(Text is a link to <a rel="nofollow" class="external free" href="http://wikka.jsnx.com/HomePage/revisions">http://wikka.jsnx.com/HomePage/revisions</a>)
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span class="mw-headline" id="XWiki">XWiki</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.xwiki.org/xwiki/bin/view/Main/WebHome">http://www.xwiki.org/xwiki/bin/view/Main/WebHome</a>:
+</p><p>&#8220;Creator: WebHome  Date: 2004/04/20 23:57&#8221; and &#8220;Last Author: zhang hua  Date: 2005/08/29 14:04&#8221; are displayed at the bottom of the page
+</p><p>&#8220;Last-Modified: Mon, 29 Aug 2005 12:04:36 GM&#8221; is sent by the server.
+</p>
+<h4><span class="mw-headline" id="Midgard_CMS">Midgard CMS</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.midgard-project.org/documentation/">http://www.midgard-project.org/documentation/</a>
+</p><p>No Last Updated information shown on the page by default, though is available using the &#8220;&lt;(last-updated)&gt;&#8221; template
+</p><p>HTML headers include &#8220;&lt;meta name="lastupdated" content="2005-09-14" /&gt;&#8221;
+</p><p>&#8220;Last-Modified: Wed, 14 Sep 2005 09:08:21 GMT&#8221; is sent by the server.
+</p>
+<h3><span class="mw-headline" id="Individual_web_sites">Individual web sites</span></h3>
+<h4><span class="mw-headline" id="bbc.co.uk">bbc.co.uk</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://news.bbc.co.uk/1/hi/entertainment/film/3640454.stm">http://news.bbc.co.uk/1/hi/entertainment/film/3640454.stm</a>:
+</p><p>&#8220;Last Updated: Thursday, 9 September, 2004, 16:21 GMT 17:21 UK&#8221; is displayed at the top of the page.
+</p><p>No Last-modified header is sent.
+</p>
+<h4><span id="php.net_(documentation_pages)"></span><span class="mw-headline" id="php.net_.28documentation_pages.29">php.net (documentation pages)</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.php.net/manual/en/function.explode.php">http://www.php.net/manual/en/function.explode.php</a>:
+</p><p>&#8220;Last updated: Sun, 09 Oct 2005&#8221; is displayed at the top of the page.
+</p><p>&#8220;Last-Modified: Tue, 11 Oct 2005 15:24:36 GMT&#8221; is sent.
+</p>
+<h4><span class="mw-headline" id="Hentaikuindo">Hentaikuindo</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.hentaikuindo.com">http://www.hentaikuindo.com</a>:
+</p><p>&#8220;last modified 19:04, 27 Mei 2016&#8221; is displayed at the bottom of the
+page.
+</p><p>&#8220;Last-modified: Fri, 27 Mei 2016 19:04:43 GMT&#8221; is sent by the server.
+</p>
+<h2><span id="&quot;Published&quot;_examples"></span><span class="mw-headline" id=".22Published.22_examples">"Published" examples</span></h2>
+<h3><span class="mw-headline" id="Content_management_and_content_publishing_software_2">Content management and content publishing software</span></h3>
+<p>Note: The date format used by the CMS systems may vary per skin/theme.
+</p>
+<h4><span class="mw-headline" id="b2evolution">b2evolution</span></h4>
+<p>Example #1 from <a rel="nofollow" class="external free" href="http://demo.b2evolution.net/HEAD/blogs/index.php?blog=2&amp;m=200511">http://demo.b2evolution.net/HEAD/blogs/index.php?blog=2&amp;m=200511</a>:
+</p><p>There are headings which contain the date of each day on which an entry was posted, e.g: ΓÇ£2005-11-05ΓÇ¥. For each entry the time of publication is displayed before the entryΓÇÖs
+heading, e.g:  ΓÇ£14:11:34, by admin, 69 words, 0 viewsΓÇ¥
+</p><p>The way dates are displayed varies per skin.
+</p>
+<h4><span class="mw-headline" id="Blogger">Blogger</span></h4>
+<p>TBD: <a rel="nofollow" class="external free" href="http://blogspot.com/">http://blogspot.com/</a>
+</p>
+<h4><span class="mw-headline" id="dotclear">dotclear</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.dotclear.net/devlog/2004/09">http://www.dotclear.net/devlog/2004/09</a>:
+</p><p>The date of publication is displayed above the entryΓÇÖs title, e.g: ΓÇ£samedi 18 septembre 2004ΓÇ¥. The time of publication is displayed at the bottom of the entry, e.g: ΓÇ£Par Olivier Meunier, ├á 20:45ΓÇ¥.
+</p>
+<h4><span id="LiveJournal/DeathJournal"></span><span class="mw-headline" id="LiveJournal.2FDeathJournal">LiveJournal/DeathJournal</span></h4>
+<p>TBD: <a rel="nofollow" class="external free" href="http://livejournal.com/">http://livejournal.com/</a> and <a rel="nofollow" class="external free" href="http://deathjournal.com/">http://deathjournal.com/</a>
+</p>
+<h4><span class="mw-headline" id="greymatter">greymatter</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://noahslark.com/?e=197">http://noahslark.com/?e=197</a>:
+</p><p>ΓÇ£October 14, 2005 @ 9:07 PMΓÇ¥ is displayed below the entryΓÇÖs title.
+</p>
+<h4><span class="mw-headline" id="MSN_spaces">MSN spaces</span></h4>
+<p>TBD: <a rel="nofollow" class="external free" href="http://spaces.msn.com/">http://spaces.msn.com/</a>
+</p>
+<h4><span class="mw-headline" id="Typo">Typo</span></h4>
+<p>Example form <a rel="nofollow" class="external free" href="http://blog.leetsoft.com/articles/2005/11/01/type-theme-contest">http://blog.leetsoft.com/articles/2005/11/01/type-theme-contest</a>: (as of 2005-11-05)
+</p><p>ΓÇ£Posted by tobi 4 days agoΓÇ¥ is displayed below the entryΓÇÖs heading.
+</p>
+<h4><span cl
+2000
+ass="mw-headline" id="TYPO3">TYPO3</span></h4>
+<p>TBD: <a rel="nofollow" class="external free" href="http://typo3.org/">http://typo3.org/</a>
+</p>
+<h4><span class="mw-headline" id="Wordpress">Wordpress</span></h4>
+<p>TBD: <a rel="nofollow" class="external free" href="http://wordpress.org/">http://wordpress.org/</a>
+</p>
+<h3><span class="mw-headline" id="Individual_web_sites_2">Individual web sites</span></h3>
+<h4><span class="mw-headline" id="cnn.com">cnn.com</span></h4>
+<p>Example from <a rel="nofollow" class="external free" href="http://www.cnn.com/2005/SPORT/football/10/28/austria.rapid/index.html">http://www.cnn.com/2005/SPORT/football/10/28/austria.rapid/index.html</a>:
+</p><p>&#8220;Friday, October 28, 2005; Posted: 11:48 a.m. EDT (15:48 GMT)&#8221; is displayed at the top of the page.
+</p><p><br />
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li><a href="/wiki/hAtom" class="mw-redirect" title="hAtom">hAtom 0.1</a></li>
+<li><a href="/wiki/datetime-design-pattern" title="datetime-design-pattern">Datetime Design Pattern</a></li>
+<li>&#8594; <a href="/wiki/last-modified-formats" title="last-modified-formats">last-modified-formats</a></li></ul>
+<p>[[<a rel="nofollow" class="external autonumber" href="http://obat-amandel-alami.blogspot.com">[1]</a>]]
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20201113183956
+Cache expiry: 86400
+Dynamic content: false
+Complications: []
+CPU time usage: 0.019 seconds
+Real time usage: 0.022 seconds
+Preprocessor visited node count: 105/1000000
+Preprocessor generated node count: 0/1000000
+PostΓÇÉexpand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip postΓÇÉexpand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key wiki:pcache:idhash:1143-0!canonical and timestamp 20201113183956 and revision id 65543
+ -->
+</div></div>
+		
+		<div class="printfooter">Retrieved from "<a dir="ltr" href="http://microformats.org/wiki/index.php?title=last-modified-examples&amp;oldid=65543">http://microformats.org/wiki/index.php?title=last-modified-examples&amp;oldid=65543</a>"</div>
+		
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+		<div class="visualClear"></div>
+		
+	</div>
+</div>
+
+
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=last-modified-examples" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+							<li id="ca-nstab-main" class="selected"><span><a href="/wiki/last-modified-examples" title="View the content page [c]" accesskey="c">Page</a></span></li><li id="ca-talk" class="new"><span><a href="/wiki/index.php?title=Talk:last-modified-examples&amp;action=edit&amp;redlink=1" rel="discussion" title="Discussion about the content page (page does not exist) [t]" accesskey="t">Discussion</a></span></li>						</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<input type="checkbox" class="vectorMenuCheckbox" aria-labelledby="p-variants-label" />
+						<h3 id="p-variants-label">
+							<span>Variants</span>
+						</h3>
+						<ul class="menu">
+													</ul>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+							<li id="ca-view" class="collapsible selected"><span><a href="/wiki/last-modified-examples">Read</a></span></li><li id="ca-viewsource" class="collapsible"><span><a href="/wiki/index.php?title=last-modified-examples&amp;action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li><li id="ca-history" class="collapsible"><span><a href="/wiki/index.php?title=last-modified-examples&amp;action=history" title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>						</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<input type="checkbox" class="vectorMenuCheckbox" aria-labelledby="p-cactions-label" />
+						<h3 id="p-cactions-label"><span>More</span></h3>
+						<ul class="menu">
+													</ul>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+						<form action="/wiki/index.php" id="searchform">
+							<div id="simpleSearch">
+								<input type="search" name="search" placeholder="Search Microformats Wiki" title="Search Microformats Wiki [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Special:Search" name="title"/><input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page" title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-Microformats_Wiki" aria-labelledby="p-Microformats_Wiki-label">
+			<h3 id="p-Microformats_Wiki-label">Microformats Wiki</h3>
+			<div class="body">
+								<ul>
+					<li id="n-Front-Page"><a href="/wiki/Main_Page">Front Page</a></li><li id="n-recentchanges"><a href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-Microformats" aria-labelledby="p-Microformats-label">
+			<h3 id="p-Microformats-label">Microformats</h3>
+			<div class="body">
+								<ul>
+					<li id="n-Blog"><a href="http://microformats.org" rel="nofollow">Blog</a></li><li id="n-Events"><a href="/wiki/Microformats_Wiki:Current_events">Events</a></li><li id="n-About"><a href="/wiki/About">About</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Tools</h3>
+			<div class="body">
+								<ul>
+					<li id="t-whatlinkshere"><a href="/wiki/Special:WhatLinksHere/last-modified-examples" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/Special:RecentChangesLinked/last-modified-examples" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="/wiki/index.php?title=last-modified-examples&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="/wiki/index.php?title=last-modified-examples&amp;oldid=65543" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/wiki/index.php?title=last-modified-examples&amp;action=info" title="More information about this page">Page information</a></li>				</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+				<div id="footer" role="contentinfo">
+						<ul id="footer-info">
+								<li id="footer-info-lastmod"> This page was last edited on 27 May 2016, at 11:26.</li>
+							</ul>
+		
+77a
+				<ul id="footer-places">
+								<li id="footer-places-about"><a href="/wiki/Microformats_Wiki:About" title="Microformats Wiki:About">About Microformats Wiki</a></li>
+								<li id="footer-places-disclaimer"><a href="/wiki/Microformats_Wiki:General_disclaimer" title="Microformats Wiki:General disclaimer">Disclaimers</a></li>
+								<li id="footer-places-linode">hosting sponsored by <a href="https://www.linode.com/?r=f27e4bad029e8c2a2bf8737bf12439133dd4b977">Linode</a></li>
+							</ul>
+										<ul id="footer-icons" class="noprint">
+										<li id="footer-poweredbyico">
+						<a href="https://www.mediawiki.org/"><img src="/wiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/wiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /wiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>					</li>
+									</ul>
+						<div style="clear: both;"></div>
+		</div>
+		
+
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-1889385-1" async=""></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-1889385-1');
+</script>
+
+<script>(RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.019","walltime":"0.022","ppvisitednodes":{"value":105,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"unstrip-depth":{"value":0,"limit":20},"unstrip-size":{"value":0,"limit":5000000},"timingprofile":["100.00%    0.000      1 -total"]},"cachereport":{"timestamp":"20201113183956","ttl":86400,"transientcontent":false}}});mw.config.set({"wgBackendResponseTime":64});});</script>
+</body>
+</html>
+
+0
+
